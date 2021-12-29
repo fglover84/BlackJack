@@ -30,10 +30,10 @@ public class Hand {
 
     public void addCard(Card card) {
         this.cards.add(card);
-        updateScore();
+        calculateScore();
     }
     
-    private ArrayList<Integer> updateScore(){
+    private ArrayList<Integer> calculateScore(){
         boolean containAce = false;
         for(Card eachCard: cards){
             if (eachCard.valueName.equals(CardValueEnum.ACE) && !containAce){

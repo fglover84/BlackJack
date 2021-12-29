@@ -45,17 +45,21 @@ public class DealerTest {
 
     /**
      * Test of startGame method, of class Dealer.
-     * Each player should have been dealt two cards
+     * UC5 - Deal opening hand/start game
+     * The game is started when the dealer shuffles the deck and deals two 
+     * cards to each of the players
      */
     @Test
     public void testStartGame() {
         System.out.println("Testing startGame");
         String[] args = null;
-        Game.main(args);
-        ArrayList<Player> players = Game.getPlayers();
+        BlackJack.main(args);
+        System.out.println("Deck has been shuffled: " + BlackJack.getDealer().getDeck().isShuffled());
+        ArrayList<Player> players = BlackJack.getPlayers();
         Hand playerHand = players.get(0).getHand();
-        System.out.println("Hand has " + playerHand.getCards().size() + "Cards");
-        assertEquals(2, playerHand.getCards().size());
+        System.out.println("Hand has " + playerHand.getCards().size() + " cards");
+        assertTrue(playerHand.getCards().size() == 2 
+                && BlackJack.getDealer().getDeck().isShuffled());
     }
     
 }

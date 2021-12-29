@@ -18,6 +18,8 @@ public class Player {
         this.name = name;
         this.hand = new Hand();
     }
+    
+    
 
     public Hand getHand() {
         return hand;

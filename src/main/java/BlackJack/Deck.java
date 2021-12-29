@@ -17,6 +17,7 @@ import java.util.Collections;
 public class Deck {
 
     private ArrayList<Card> deck = new ArrayList<Card>();
+    private boolean isShuffled;
 
     public Deck() {
         
@@ -133,6 +134,7 @@ public class Deck {
         Card kingOfClubs = new Card(CardValueEnum.KING, CardSuitEnum.CLUBS);
         deck.add(kingOfClubs);
         
+        isShuffled = false;
     }
     
     
@@ -148,19 +150,28 @@ public class Deck {
     
     //Returns next card from the top of the deck 
     public Card getNextCard(){
+        
         return deck.remove(0);
     }
     
     //Puts returned card back into the bottom of the deck
     public void returnCardToDeck(Card card){
         deck.add(card);
+        isShuffled = false;
     }
     
     //shuffles deck of cards randomly
     public void shuffleDeck(){  
         System.out.println("Shuffling deck of cards");
         Collections.shuffle(deck);
+        isShuffled = true;
     }
+
+    public boolean isShuffled() {
+        return isShuffled;
+    }
+    
+    
 
     @Override
     public String toString() {

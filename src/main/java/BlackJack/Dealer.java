@@ -18,7 +18,7 @@ public class Dealer {
 
     public Dealer() {
         this.deck = new Deck();
-        players = Game.getPlayers();
+        players = BlackJack.getPlayers();
     }
     
     public void dealPlayersOpeningHand(){
@@ -31,6 +31,16 @@ public class Dealer {
         }
         
     }
+
+    public Deck getDeck() {
+        return deck;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+    
+    
 
     void startGame() {
         System.out.println("--------- Starting Game -----------");

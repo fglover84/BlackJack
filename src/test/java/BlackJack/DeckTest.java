@@ -44,7 +44,12 @@ public class DeckTest {
     
     /**
      * Test of Deck constructor, of class Deck.
-     * When Deck is created it must contain 52 cards
+     * UC1 Create new deck of cards
+     * A new deck of cards containing 52 cards must be created. 
+     * Each deck must contain 13 cards of each of the four suits Hearts, Diamonds, 
+     * Spades and Clubs with values Ace, 2, 3, 4, 5, 6, 7, 8, 9 , 10, Jack, Queen 
+     * and King for each suit. The numeric cards hold their face value, a Jack, 
+     * Queen and King represent a value of 10 and an Ace represents either a 1 or a 11.
      */
     @Test
     public void testDeckConstructor() {
@@ -60,6 +65,7 @@ public class DeckTest {
     
     /**
      * Test shuffling of Deck cards, of class Deck.
+     * UC2 Shuffle deck of cards 
      * When deck is shuffled the cards must be in a different order 
      * in the list than when they started 
      */

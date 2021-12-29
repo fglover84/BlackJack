@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author fionaglover
  */
-public class Game {
+public class BlackJack {
 
     private static ArrayList<Player> players;
     private static Dealer dealer;
@@ -24,20 +24,23 @@ public class Game {
         
         ArrayList<String> playerNames = new ArrayList<>();
         playerNames.add("Fiona");
-        setPlayers(1, playerNames);
+        players = new ArrayList<>();
+        for(int i = 0; i < playerNames.size(); i++){
+            players.add(new Player(playerNames.get(i)));
+        }
         dealer = new Dealer();
         dealer.startGame();
     }
 
-    public static void setPlayers(int numberOfPlayers, ArrayList<String> playerNames) {
-        players = new ArrayList<>();
-        for(int i = 0; i < numberOfPlayers; i++){
-            players.add(new Player(playerNames.get(i)));
-        }
-    }
+    
     public static ArrayList<Player> getPlayers() {
         return players;
     }
+
+    public static Dealer getDealer() {
+        return dealer;
+    }
+    
     
     
     
