@@ -5,39 +5,47 @@
  */
 package BlackJack;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author fionaglover
+ * 
+ * 
  */
 public class BlackJack {
 
-    private static ArrayList<Player> players;
-    private static Dealer dealer;
+    private Player player;
+    private Dealer dealer;
 
     /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+    *
+    * Creates the player and dealer
+    * Dealer handles the rest of the set up
+    */
+    public BlackJack() {
         
         
-        ArrayList<String> playerNames = new ArrayList<>();
-        playerNames.add("Fiona");
-        players = new ArrayList<>();
-        for(int i = 0; i < playerNames.size(); i++){
-            players.add(new Player(playerNames.get(i)));
-        }
-        dealer = new Dealer();
-        dealer.startGame();
+        String playerName = "Fiona";
+        player = new Player(playerName);
+        
+        dealer = new Dealer(player);
+        
     }
 
-    
-    public static ArrayList<Player> getPlayers() {
-        return players;
+    /**
+    * 
+    * @return player 
+    * 
+    */
+    public Player getPlayer() {
+        return player;
     }
 
-    public static Dealer getDealer() {
+    /**
+    * 
+    * @return dealer 
+    * 
+    */
+    public Dealer getDealer() {
         return dealer;
     }
     

@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: BlackJack.DealerTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.157 sec - in BlackJack.DealerTest
+Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.068 sec <<< FAILURE! - in BlackJack.DealerTest
+testPlayerHits  Time elapsed: 0.05 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at BlackJack.DealerTest.testPlayerHits(DealerTest.java:96)
+

@@ -54,7 +54,7 @@ public class PlayerTest {
         Player player = new Player("Fiona");
         assertTrue(player.getName().equals("Fiona") 
                 && player.getHand().getCards().isEmpty()
-        && player.getHand().getScore().get(0) == 0);
+        && player.getHand().getScoreList().get(0) == 0);
         
     }
 

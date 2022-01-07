@@ -1,4 +1,6 @@
 BlackJack/DeckTest.class
 BlackJack/DealerTest.class
+BlackJack/PlayerTest.class
+BlackJack/BlackJackTest.class
+View/BlackJackTableTest.class
 BlackJack/HandTest.class
-BlackJack/GameTest.class

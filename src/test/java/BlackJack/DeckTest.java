@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -129,7 +130,9 @@ public class DeckTest {
         Card card = deck.getNextCard();
         
         deck.returnCardToDeck(card);
-        System.out.println("Card being returned is: " + card + "Card found in deck: " + deck.getDeck().contains(card));
+        System.out.println("Card being returned is: " + card);
+        System.out.println("Card found in deck: " + deck.getDeck().contains(card));
+        
         System.out.println("-----------------------------------");
         assertTrue(deck.getDeck().contains(card));
         

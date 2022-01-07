@@ -13,18 +13,31 @@ import java.util.Objects;
 /**
  *
  * @author fionaglover
+ * One playing card belonging to a deck of 52 playing cards
+ * 
  */
 public class Card {
     
-    //Card number or Jack, Queen, King or Ace
-    CardValueEnum valueName;
+     //Card values: ENUM: TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, 
+     // JACK, QUEEN, KING or ACE
+    private final CardValueEnum valueName;
     //Card suit ENUM CLUBS, HEARTS, DIAMONDS, SPADES
-    CardSuitEnum suit;
-    ArrayList<Integer> value = new ArrayList<>();
+    private final CardSuitEnum suit;
+    //Numerical value of card
+    private final ArrayList<Integer> value = new ArrayList<>();
+    //File path of where the card image is stored
+    private final String imgFilePath;
 
-    public Card(CardValueEnum valueName, CardSuitEnum suit) {
+    /**
+     * Creates a new playing card
+     * @param valueName 
+     * @param suit
+     * @param imgFilePath
+     */
+    public Card(CardValueEnum valueName, CardSuitEnum suit, String imgFilePath) {
         this.valueName = valueName;
         this.suit = suit;
+        this.imgFilePath = imgFilePath;
         if (valueName.compareTo(CardValueEnum.ACE) == 0){
             value.add(1);
             value.add(11);
@@ -55,6 +68,43 @@ public class Card {
         }
         
     }
+
+    /**
+     * @return The value name of the card
+     * Can be CardValueEnum TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN
+     * JACK, QUEEN, KING
+     */
+    public CardValueEnum getValueName() {
+        return valueName;
+    }
+
+    /**
+     * @return the suit of the card 
+     * Can be CardSuitEnum HEARTS, DIAMONDS, CLUBS, SPADES
+     */
+    public CardSuitEnum getSuit() {
+        return suit;
+    }
+
+    /**
+     * @return the numerical value of the card
+     * Ace can be equal to 1 or 11
+     * 2 to 10 is its face value equivalent
+     * Jack, Queen, King are equal to 10
+     */
+    public ArrayList<Integer> getValue() {
+        return value;
+    }
+
+    /**
+     * 
+     * @return The file path name of where the card image is stored 
+     */
+    public String getImgFilePath() {
+        return imgFilePath;
+    }
+    
+    
     
 
     @Override

@@ -20,13 +20,13 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class BlackJackTest {
     
+    static BlackJack blackJack;
     public BlackJackTest() {
     }
     
     @BeforeAll
     public static void setUpClass() {
-        String[] args = null;
-        BlackJack.main(args);
+        blackJack = new BlackJack();
     }
     
     @AfterAll
@@ -54,15 +54,16 @@ public class BlackJackTest {
     @Test
     public void testBlackJackMain() {
         System.out.println("Testing blackjack main");
-        Dealer dealer = BlackJack.getDealer();
+        Dealer dealer = blackJack.getDealer();
+        dealer.startGame();
         System.out.println("Dealer has been created: " + dealer != null);
         System.out.println("Deck has been created: " + dealer.getDeck() != null);
-        System.out.println("Players have been created: " + !BlackJack.getPlayers().isEmpty());
-        System.out.println("Players: " + BlackJack.getPlayers());
-        
+        System.out.println("Players have been created: " + (blackJack.getPlayer() != null));
+        System.out.println("Players: " + blackJack.getPlayer());
+        System.out.println("--------------------------------------");
         assertTrue(dealer != null 
                 && dealer.getDeck() != null 
-                && !BlackJack.getPlayers().isEmpty());
+                && blackJack.getPlayer() != null);
     }   
     
 }
