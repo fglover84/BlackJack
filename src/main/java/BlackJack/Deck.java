@@ -20,9 +20,12 @@ import java.util.Collections;
  */
 public class Deck {
 
-    private ArrayList<Card> deck = new ArrayList<>();
+    private final ArrayList<Card> deck = new ArrayList<>();
     private boolean isShuffled;
 
+    /**
+     * Constructor for a new deck of cards
+     */
     public Deck() {
         
         //Create Spades cards and add to deck
@@ -163,8 +166,7 @@ public class Deck {
      * 
      * @return card from the top of the deck
      */
-    public Card getNextCard(){
-        
+    public Card getNextCard(){    
         return deck.remove(0);
     }
     
@@ -187,6 +189,7 @@ public class Deck {
         System.out.println("Shuffling deck of cards");
         Collections.shuffle(deck);
         isShuffled = true;
+        
     }
 
     /**

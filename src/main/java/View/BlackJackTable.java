@@ -5,7 +5,6 @@
  */
 package View;
 
-import BlackJack.BlackJack;
 import BlackJack.Dealer;
 import BlackJack.Player;
 import java.awt.Image;
@@ -14,7 +13,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -29,19 +27,15 @@ public class BlackJackTable extends javax.swing.JFrame {
 
     private ImageIcon cardIconImage;
     private Image cardImg;
-    private final BlackJack game;
     private final Dealer dealer;
-    private Player player;
-    ArrayList<JLabel> player1CardPlacments;
+    ArrayList<JLabel> playerCardPlacments;
     /**
      * Creates new BlackJack Table and sets up the table for the game to begin.
      * Asks dealer to start the game and adds cards and starting score to the table.
      */
     public BlackJackTable() {
         initComponents();
-        game = new BlackJack();
-        dealer = game.getDealer();
-        player = game.getPlayer();
+        dealer = new Dealer();
         setUpNewGame();
                 
     }
@@ -53,14 +47,14 @@ public class BlackJackTable extends javax.swing.JFrame {
      */
     private void setUpNewGame(){
         dealer.startGame();
-        player1CardPlacments = new ArrayList<>();
-        player1CardPlacments.add(card1);
-        player1CardPlacments.add(card2);
-        player1CardPlacments.add(card3);
-        player1CardPlacments.add(card4);
-        player1CardPlacments.add(card5);
-        player1CardPlacments.add(card6);
-        player1CardPlacments.add(card7);
+        playerCardPlacments = new ArrayList<>();
+        playerCardPlacments.add(card1);
+        playerCardPlacments.add(card2);
+        playerCardPlacments.add(card3);
+        playerCardPlacments.add(card4);
+        playerCardPlacments.add(card5);
+        playerCardPlacments.add(card6);
+        playerCardPlacments.add(card7);
         card1.setIcon(null);
         card2.setIcon(null);
         card3.setIcon(null);
@@ -84,16 +78,7 @@ public class BlackJackTable extends javax.swing.JFrame {
     */
     private void updateScore(){
         
-        ArrayList<Integer> scoreList = player.getHand().getScoreList();
-        String scoreString;
-        if (Objects.equals(scoreList.get(0), scoreList.get(1))){
-            scoreString = String.valueOf(scoreList.get(0));
-        } else if(scoreList.get(0) > 21){
-            scoreString = String.valueOf(scoreList.get(1));
-        }else {
-            scoreString = String.valueOf(scoreList.get(1)) + " / " + String.valueOf(scoreList.get(0));
-        }
-        score.setText(scoreString);
+        score.setText(dealer.getPlayer().getHand().getScoreAsText());
     }
     
     /**
@@ -101,18 +86,7 @@ public class BlackJackTable extends javax.swing.JFrame {
      * score of 21, is still in the game or has lost the game
      */
     private void evaluateScore(){
-        int evaluatedScore = player.getHand().evaluateScore();
-        switch (evaluatedScore) {
-            case 1:
-                result.setText("BlackJack - You WIN!!");
-                break;
-            case 0:
-                result.setText("Game in play");
-                break;
-            case -1:
-                result.setText("You lose!");
-                break;
-        }
+        result.setText(dealer.getPlayer().getHand().getScoreEvaluationAsText());
     }
     
     /**
@@ -120,15 +94,7 @@ public class BlackJackTable extends javax.swing.JFrame {
      * to stand  
      */
     private void evaluateFinalScore(){
-        int evaluatedScore = player.getHand().evaluateScore();
-        switch (evaluatedScore) {
-            case 0:
-                result.setText("You win!");
-                break;
-            case -1:
-                result.setText("You lose!");
-                break;
-        }
+        result.setText(dealer.getPlayer().getHand().getFinalScoreEvaluationAsText());
     }
     
     /**
@@ -136,16 +102,15 @@ public class BlackJackTable extends javax.swing.JFrame {
     * Adds all cards in the players hand to the table
     */
     private void addCardsToTable(){
-        for(int i = 0; i<player.getHand().getCards().size(); i++){
+        for(int i = 0; i<dealer.getPlayer().getHand().getCards().size(); i++){
             FileInputStream fis = null;
             try {
-                File file = new File(player.getHand().getCards().get(i).getImgFilePath());
+                File file = new File(dealer.getPlayer().getHand().getCards().get(i).getImgFilePath());
                 fis = new FileInputStream(file);
-                ;
                 cardImg = ImageIO.read(fis);
                 Image resizedCardImage = cardImg.getScaledInstance(100, 150, 1);
                 cardIconImage = new ImageIcon(resizedCardImage);
-                player1CardPlacments.get(i).setIcon(cardIconImage);
+                playerCardPlacments.get(i).setIcon(cardIconImage);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(BlackJackTable.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
@@ -192,8 +157,10 @@ public class BlackJackTable extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setForeground(new java.awt.Color(0, 204, 0));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
+        jPanel2.setForeground(new java.awt.Color(0, 204, 0));
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
         scoreLabel.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
@@ -212,11 +179,6 @@ public class BlackJackTable extends javax.swing.JFrame {
         standButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 standButtonMouseClicked(evt);
-            }
-        });
-        standButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                standButtonActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -341,14 +303,10 @@ public class BlackJackTable extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void standButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_standButtonActionPerformed
-
     private void hitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hitButtonMouseClicked
         // Calls the dealer to deal the next card to the player and 
         //updates the detils of the new card and score on the Black Jack table
-        if (!player.getHand().isComplete()){
+        if (!dealer.getPlayer().getHand().isComplete()){
             dealer.playerHits();
             addCardsToTable();
             updateScore();
@@ -360,13 +318,13 @@ public class BlackJackTable extends javax.swing.JFrame {
     private void newGameButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newGameButtonMouseClicked
         // TODO add your handling code here:
         dealer.resetGame();
-        setUpNewGame();
+        this.setUpNewGame();
     }//GEN-LAST:event_newGameButtonMouseClicked
 
     private void standButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_standButtonMouseClicked
         // TODO add your handling code here:
         dealer.playerStands();
-        evaluateFinalScore();
+        this.evaluateFinalScore();
     }//GEN-LAST:event_standButtonMouseClicked
 
     /**

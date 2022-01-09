@@ -7,6 +7,7 @@ package BlackJack;
 
 import Enum.CardValueEnum;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  *
@@ -28,10 +29,10 @@ public class Hand {
    
     public Hand() {
         this.cards = new ArrayList<>();
-        score = new ArrayList<>();
-        score.add(0);
-        score.add(0);
-        complete = false;
+        this.score = new ArrayList<>();
+        this.score.add(0);
+        this.score.add(0);
+        this.complete = false;
         
     }
 
@@ -103,7 +104,7 @@ public class Hand {
      * be returned.
      */
     public int getScore() {
-        //first score with potential Ace scored as 11 is returned is value is <=21
+        //first score in list with potential Ace scored as 11 is returned if value is <=21
         if(score.get(0)<=21){
             return score.get(0);
         //else the second value will always be the lowest of the two
@@ -112,6 +113,25 @@ public class Hand {
             
         }
     
+    }
+    
+    /**
+     * 
+     * @return score of hand as String representation
+     */
+    public String getScoreAsText(){
+        String scoreString;
+        if (Objects.equals(score.get(0), score.get(1))){
+            scoreString = String.valueOf(score.get(0));
+        } else if(score.get(0) > 21){
+            scoreString = String.valueOf(score.get(1));
+        } else if(evaluateScore() == 1){
+            scoreString = String.valueOf(score.get(0));
+                  
+        } else {
+            scoreString = String.valueOf(score.get(1)) + " / " + String.valueOf(score.get(0));
+        }
+        return scoreString;
     }
     
     /**
@@ -146,6 +166,49 @@ public class Hand {
             return -1;
         }
     }
+    
+    /**
+     * 
+     * @return score evaluation as a String representation
+     */
+    public String getScoreEvaluationAsText(){
+        int evaluatedScore = this.evaluateScore();
+        String text = "";
+        switch (evaluatedScore) {
+            case 1:
+                text = "BlackJack - You WIN!!";
+                break;
+            case 0:
+                text = "Game in play";
+                break;
+            case -1:
+                text = "You lose!";
+                break;
+        }
+        if (evaluateScore() == 0 && getScore() == 21){
+            text = "You win!";
+        }
+        return text;
+    }
+    
+    public String getFinalScoreEvaluationAsText(){
+        int evaluatedScore = evaluateScore();
+        String text = "";
+        switch (evaluatedScore) {
+            case 1:
+                text = "BlackJack - You WIN!!";
+                break;
+            case 0:
+                text = "You win!";
+                break;
+            case -1:
+                text = "You lose!";
+                break;
+        }
+        return text;
+    }
+    
+    
 
     public boolean isComplete() {
         return complete;

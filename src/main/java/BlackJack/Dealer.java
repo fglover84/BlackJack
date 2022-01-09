@@ -14,16 +14,14 @@ public class Dealer {
     
     Deck deck;
     Player player;
-    BlackJack blackJack;
-    Player currentPlayer;
+    
 
     /**
-     * Dealer constructor creates a new deck of cards
-     * @param player 
+     * Dealer constructor creates a new deck of cards and a new player
      */
-    public Dealer(Player player) {
+    public Dealer() {
         this.deck = new Deck();
-        this.player = player;
+        this. player = new Player("Player 1");
     }
     
     /**
@@ -45,7 +43,8 @@ public class Dealer {
     }
     
     /**
-     * 
+     * The player chooses to stand. No new cards are dealt and the score is recalculated 
+     * and evaluated
      */
     public void playerStands(){
         System.out.println("Player stands");
@@ -58,7 +57,8 @@ public class Dealer {
     }
     
     /**
-     * 
+     * The game is reset. All cards are returned to the deck and hands set to not 
+     * complete ready for the next round
      */
     public void resetGame(){
         while(!player.getHand().getCards().isEmpty()){
@@ -66,12 +66,13 @@ public class Dealer {
         }
         player.getHand().setComplete(false);
     }
+    
     /**
-     * Deals players opening hand. Takes two cards from the top of the deck and 
-     * puts them in the players hand 
+     * Deals players opening hand. 
+     * Takes two cards from the top of the deck and puts them in the players hand 
      */
     public void dealPlayersOpeningHand(){
-        System.out.println("Dealing players opening hands"); 
+        System.out.println("Dealing players opening hand"); 
         player.addCardToHand(deck.getNextCard());
         player.addCardToHand(deck.getNextCard());
              
@@ -99,8 +100,7 @@ public class Dealer {
     public void startGame() {
         System.out.println("--------- Starting Game -----------");
         deck.shuffleDeck();
-        dealPlayersOpeningHand();
-        
+        this.dealPlayersOpeningHand();
         System.out.println("-----------------------------------");
     }
 
@@ -114,5 +114,6 @@ public class Dealer {
         Card newCard = deck.getNextCard();
         player.getHand().addCard(newCard);
         return newCard;
+        
     }
 }

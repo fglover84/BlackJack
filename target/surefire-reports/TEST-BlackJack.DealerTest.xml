@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="BlackJack.DealerTest" time="0.068" tests="3" errors="0" skipped="0" failures="1">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="BlackJack.DealerTest" time="0.025" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="11.0.13+10-LTS-370"/>
@@ -65,40 +65,10 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase name="testStartGame" classname="BlackJack.DealerTest" time="0.014"/>
+  <testcase name="testResetGame" classname="BlackJack.DealerTest" time="0.006"/>
+  <testcase name="testDealPlayersOpeningHand" classname="BlackJack.DealerTest" time="0.005"/>
+  <testcase name="testStartGame" classname="BlackJack.DealerTest" time="0.001"/>
+  <testcase name="testDealPlayerCard" classname="BlackJack.DealerTest" time="0"/>
   <testcase name="testPlayerStands" classname="BlackJack.DealerTest" time="0.003"/>
-  <testcase name="testPlayerHits" classname="BlackJack.DealerTest" time="0.05">
-    <failure message="expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
-	at BlackJack.DealerTest.testPlayerHits(DealerTest.java:96)
-]]></failure>
-    <system-out><![CDATA[Testing playerHits
---------- Starting Game -----------
-Shuffling deck of cards
-Dealing players opening hands
-adding card ACE OF HEARTS to hand
-adding card NINE OF DIAMONDS to hand
-Calculating score
-Card: ACE OF HEARTS
-Score Updated: [11, 1]
-Card: NINE OF DIAMONDS
-Score Updated: [20, 10]
------------------------------------
-Hand has 2 cards
-Score is valid: 0
-Player hits
-Dealing player new card
-adding card TEN OF DIAMONDS to hand
-Calculating score
-Card: ACE OF HEARTS
-Score Updated: [11, 1]
-Card: NINE OF DIAMONDS
-Score Updated: [20, 10]
-Card: TEN OF DIAMONDS
-Score Updated: [30, 20]
-Hand has 3 cards
-Starting score is: 20
-Updated score is: 20
-Updated score is valid: 0
-]]></system-out>
-  </testcase>
+  <testcase name="testPlayerHits" classname="BlackJack.DealerTest" time="0.006"/>
 </testsuite>

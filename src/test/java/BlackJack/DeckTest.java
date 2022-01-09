@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -21,6 +20,7 @@ import org.junit.jupiter.api.Test;
  */
 public class DeckTest {
     static Deck deck;
+    
     
     public DeckTest(){
         
@@ -46,15 +46,20 @@ public class DeckTest {
     /**
      * Test of Deck constructor, of class Deck.
      * UC1 Create new deck of cards
+     * 
      * A new deck of cards containing 52 cards must be created. 
      * Each deck must contain 13 cards of each of the four suits Hearts, Diamonds, 
      * Spades and Clubs with values Ace, 2, 3, 4, 5, 6, 7, 8, 9 , 10, Jack, Queen 
      * and King for each suit. The numeric cards hold their face value, a Jack, 
      * Queen and King represent a value of 10 and an Ace represents either a 1 or a 11.
+     * 
+     * Precondition:     No deck of cards exist
+     * Post-condition:   A deck of cards exists containing 52 cards
      */
     @Test
-    public void testDeckConstructor() {
+    public void testCreateNewDeck() {
         System.out.println("------------------------------------");
+        System.out.println("testing createNewDeck");
         System.out.println("Checking there are 52 cards in the deck");
         
         int result = deck.getDeck().size();
@@ -67,12 +72,19 @@ public class DeckTest {
     /**
      * Test shuffling of Deck cards, of class Deck.
      * UC2 Shuffle deck of cards 
-     * When deck is shuffled the cards must be in a different order 
-     * in the list than when they started 
+     * 
+     * Taking the deck of cards, when the dealer shuffles the deck of cards the 
+     * order of the cards should have changed
+     * 
+     * Precondition:  Deck has not been shuffled
+     * Post-condition: The order of the cards in the deck is different to the 
+     *                  order in the initial deck
      */
     @Test
     public void testShuffleDeck() {
-        System.out.println("Checking cards have been shuffled");
+        System.out.println("Testing shuffleDeck");
+        
+        System.out.println("Deck has been shuffled: " + deck.isShuffled());
        
         ArrayList<Card> deckCopy = new ArrayList<>(deck.getDeck());
         
@@ -92,29 +104,19 @@ public class DeckTest {
         assertTrue (hasBeenShuffled);
     }
 
-    /**
-     * Test of getSize method, of class Deck.
-     */
-    @Test
-    public void testGetSize() {
-        System.out.println("Testing getSize");
-        int expResult = 52;
-        int result = deck.getSize();
-        System.out.println("Deck size: " + result);
-        System.out.println("-----------------------------------");
-        assertEquals(expResult, result);
-        
-    }
 
     /**
      * Test of getNextCard method, of class Deck.
+     * 
+     * Card from the top of the deck should be returned
+     * 
      */
     @Test
     public void testGetNextCard() {
         System.out.println("Testing getNextCard");
         Card expResult = deck.getDeck().get(0);
         Card result = deck.getNextCard();
-        System.out.println("Next card in deck is: expResult. Card returned is: " + result);
+        System.out.println("Next card in deck is: "+  expResult +  " Card returned is: " + result);
         System.out.println("-----------------------------------");
         assertEquals(expResult, result);
         
@@ -123,6 +125,8 @@ public class DeckTest {
 
     /**
      * Test of returnCardToDeck method, of class Deck.
+     * 
+     * Card should be returned to the bottom of the deck
      */
     @Test
     public void testReturnCardToDeck() {
@@ -131,12 +135,18 @@ public class DeckTest {
         
         deck.returnCardToDeck(card);
         System.out.println("Card being returned is: " + card);
-        System.out.println("Card found in deck: " + deck.getDeck().contains(card));
+        System.out.println("Card found at the bottom of the deck: " + deck.getDeck().get(deck.getDeck().size()-1).equals(card));
         
         System.out.println("-----------------------------------");
-        assertTrue(deck.getDeck().contains(card));
+        assertTrue(deck.getDeck().get(deck.getDeck().size()-1).equals(card));
         
     }
+
+    
+
+    
+
+    
 
     
     

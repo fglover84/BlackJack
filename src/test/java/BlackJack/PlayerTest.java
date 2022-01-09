@@ -46,17 +46,24 @@ public class PlayerTest {
      * empty hand which should be responsible for storing cards dealt by the 
      * dealer during game play and for calculating the hand score and validating 
      * its value.
+     * 
+     * Precondition: The player does not exist   
+     * Post-condition: An instance of a player has been created, an instance of 
+     * a hand has been created and assigned to player
      */
     @Test
     public void testPlayerConstructor() {
         System.out.println("Testing player constructor");
         
-        Player player = new Player("Fiona");
-        assertTrue(player.getName().equals("Fiona") 
-                && player.getHand().getCards().isEmpty()
-        && player.getHand().getScoreList().get(0) == 0);
+        Player player = new Player("Player 1");
+        assertTrue(player != null && player.getHand() != null);
         
     }
+
+    
+
+
+
 
     
     

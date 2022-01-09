@@ -103,18 +103,8 @@ public class Card {
     public String getImgFilePath() {
         return imgFilePath;
     }
-    
-    
-    
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 47 * hash + Objects.hashCode(this.suit);
-        hash = 47 * hash + Objects.hashCode(this.valueName);
-        return hash;
-    }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -131,6 +121,14 @@ public class Card {
             return false;
         }
         return Objects.equals(this.valueName, other.valueName);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.valueName);
+        hash = 67 * hash + Objects.hashCode(this.suit);
+        return hash;
     }
 
     
