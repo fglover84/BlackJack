@@ -26,7 +26,10 @@ public class Hand {
     //choose to stand
     boolean complete;
     
-   
+   /**
+    * Constructor for the hand class. Creates a hand of cards a score and sets 
+    * hand complete to false
+    */
     public Hand() {
         this.cards = new ArrayList<>();
         this.score = new ArrayList<>();
@@ -117,7 +120,7 @@ public class Hand {
     
     /**
      * 
-     * @return score of hand as String representation
+     * @return Score of hand as String representation
      */
     public String getScoreAsText(){
         String scoreString;
@@ -146,7 +149,6 @@ public class Hand {
     
     
     /**
-     * 
      * @return int value determining if the score is valid. -1 is invalid and player is bust, 
      * 0 is valid and player can continue playing, 1 is a BlackJack and player wins
      * BlackJack is classified as a score of 21 when the first two cards are dealt
@@ -169,7 +171,7 @@ public class Hand {
     
     /**
      * 
-     * @return score evaluation as a String representation
+     * @return Score evaluation as a String representation
      */
     public String getScoreEvaluationAsText(){
         int evaluatedScore = this.evaluateScore();
@@ -191,6 +193,11 @@ public class Hand {
         return text;
     }
     
+    /**
+     * 
+     * @return Returns the final score evaluation as a String representation
+     * Used when player chooses to stand
+     */
     public String getFinalScoreEvaluationAsText(){
         int evaluatedScore = evaluateScore();
         String text = "";
@@ -210,10 +217,20 @@ public class Hand {
     
     
 
+    /**
+     * 
+     * @return a Boolean indicating if the players hand is complete.
+     * Hand is complete when score is >= 21
+     */
     public boolean isComplete() {
         return complete;
     }
 
+    /**
+     * 
+     * @param complete 
+     * To set if a hand is complete. Hand is complete when score is >= 21.
+     */
     public void setComplete(boolean complete) {
         this.complete = complete;
     }
