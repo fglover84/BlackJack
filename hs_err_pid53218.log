@@ -1181,7 +1181,7 @@ Dynamic libraries:
 
 VM Arguments:
 java_command: View.BlackJackTable
-java_class_path (initial): /Users/fionaglover/NetBeansProjects/BlackJack/target/classes
+java_class_path (initial): ../../../main/java/BlackJack/target/classes
 Launcher Type: SUN_STANDARD
 
 [Global flags]
